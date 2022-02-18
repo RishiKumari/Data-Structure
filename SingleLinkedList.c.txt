@@ -1,0 +1,162 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct List
+{
+    struct node*next;
+    int data;
+   }node;
+
+node*createnode(int);
+node*Insertion_at_beginning(node*);
+node*Insertion_at_mid(node*);
+node*Insertion_at_end(node*);
+void display(node*);
+
+
+void main()
+{
+    node *start,*temp;
+    int n,c;
+    start=NULL;
+    printf("Enter the number of nodes : ");
+    scanf("%d",&n);
+    start=createnode(n);
+    //node*Insertion_at_beginning(start);
+    //display(start);
+while(1)
+{
+    printf("\n1.Insertion at beginning.");
+    printf("\n2.Insertion at middle.");
+    printf("\n3.Insertion at end.");
+    printf("\n4.Display.");
+    printf("\n5.Exit.");
+    scanf("%d",&c);
+    switch(c)
+    {
+        case 1:
+              // node*temp;
+               Insertion_at_beginning(start);
+               printf("After Insertion_at_beginning:\n");
+               display(start);
+               break;
+        case 2://node*temp;
+               Insertion_at_mid(start);
+               printf("After Insertion_at_mid :\n ");
+               display(start);
+               break;
+               
+        case 3:
+               // node*temp;
+               Insertion_at_end(start);
+               printf("After Insertion_at_end:\n ");
+               display(start);
+               break;
+               
+        case 4://node*temp;
+               printf("\n\nThe data in the list are:\n\n");  
+               display(start);
+               break;
+               
+        case 5:
+               printf("\noops! Enter the correct choice.!!!!");break;
+    }
+}
+}
+node*createnode(int n)
+{
+    node*start,*q,*temp;
+    start=(node*) malloc(sizeof(node));
+    start->next=NULL;
+    printf("\nEnter the value of data in start : ");
+    scanf("%d",&start->data);
+    q=start;
+    for(int i=1;i<n;i++)
+    {
+        temp=(node*)malloc(sizeof(node));
+        q->next=temp;
+        q=q->next;
+        q->next=NULL;
+        printf("Enter the value : ");
+        scanf("%d",&q->data);
+    }
+    return(start);
+    
+}
+void display(node*start)
+{
+    node*tmp;
+     if(start==NULL)
+     {
+         printf("List is empty !!!");
+     }
+     else
+     {
+       // printf("\nThe data in the list are :\n");
+
+         tmp=start;
+         while(tmp!=NULL)
+         {
+          printf("Data is :  %d\n",tmp->data);
+          tmp=tmp->next;
+
+         }
+     }
+}
+//Insertion in a singly linked list:1.Insertion at beginning,2.Insertion in Middle(location),Insertion at   end.
+
+//Insertion at beginning:
+node*Insertion_at_beginning(node*start)
+{
+  node*temp,*q;int data;
+ temp=(node*)malloc(sizeof(node));
+  printf("Enter the value : ");
+  scanf("%d",&temp->data);
+  temp->next=start;
+  start=temp;
+  return(start);
+}
+//Insertion at end:
+node*Insertion_at_end(node*start)
+{
+     node*temp,*q;int data;
+     temp=(node*)malloc(sizeof(node));
+     printf("Enter the value : ");
+     scanf("%d",&temp->data);
+     temp->next=NULL;
+     q=start;
+     while(q->next!=NULL)
+    { 
+      q=q->next;  
+    }
+      q->next=temp;
+      return(start);
+}
+
+//Insertion at End.
+node*Insertion_at_mid(node*start)
+{
+    node*temp,*q;int data,loc;
+    temp=(node*)malloc(sizeof(node));
+    printf("Enter the value : ");
+     scanf("%d",&temp->data);
+    printf("Enter the location to insert the node.");
+    scanf("%d",&loc);
+    q=start;
+    for(int i=0;i<loc-1;i++)
+    {
+        q=q->next;
+    }
+    if(q==NULL)
+    {
+        printf("There are less than element.");
+        return(start);
+    }
+    temp->next=q->next;
+    q->next=temp;
+    return(start);
+}
+
+
+
+

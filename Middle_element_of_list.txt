@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+typedef struct node
+{
+    struct node*next;
+    int data;
+   }node;
+
+node*createnode(int);
+void display(node*);
+void print_Middle_element(node*);
+void main()
+{
+    node *start,*temp;
+    int n,c;
+    printf("Enter the number of nodes:\n");
+    scanf("%d",&n);
+    start=createnode(n);
+    display(start);
+    print_Middle_element(start);
+    
+}
+
+
+node*createnode(int n)
+{
+    node*start,*q,*temp;
+    start=(node*) malloc(sizeof(node));
+    start->next=NULL;
+    printf("\nEnter the value of data in start : ");
+    scanf("%d",&start->data);
+    q=start;
+    for(int i=1;i<n;i++)
+    {
+        temp=(node*)malloc(sizeof(node));
+        q->next=temp;
+        q=q->next;
+        q->next=NULL;
+        printf("Enter the value : ");
+        scanf("%d",&q->data);
+    }
+    return(start);
+    
+}
+void display(node*start)
+{
+    node*tmp;
+     if(start==NULL)
+     {
+         printf("List is empty !!!");
+     }
+     else
+     {
+         tmp=start;
+         while(tmp!=NULL)
+         {
+          printf("Data is :  %d\n",tmp->data);
+          tmp=tmp->next;
+
+         }
+     }
+}
+void print_Middle_element(node*start)
+{
+      node*q,*p,*temp;
+      p=start;
+      q=start;
+      if(q!=NULL)
+       {
+           while(q!=NULL && q->next!=NULL)
+           {
+               q=q->next->next;
+               p=p->next;
+           }
+          printf("\n\nThe middle element is %d:",p->data);
+      }
+}
